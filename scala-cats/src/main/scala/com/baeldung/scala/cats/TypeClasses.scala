@@ -1,3 +1,5 @@
+package com.baeldung.scala.cats
+
 
 // Interface to extend
 trait Encryptor[A] {
@@ -12,22 +14,16 @@ object EncryptorInstances {
   // Extension via implicit instance
   implicit val passwordEncryptor: Encryptor[Password] =
     new Encryptor[Password] {
-      def encrypt(value: Password): String =
-        s"encrypted{$value}"
+      def encrypt(password: Password): String =
+        s"encrypted{${password.value}}"
     }
 }
 
 object Encryption {
-  // Export the extension using it as implicit argument on method.
+  // Export the extension using it as implicit argument on method
   def toEncrypted[A](value: A)(implicit e: Encryptor[A]): String =
     e.encrypt(value)
 }
-
-import EncryptorInstances._ // import all the instances
-
-assert(Encryption.toEncrypted(Password("abc123")) == "encrypted{abc123}")
-
-
 
 object EncryptionSyntax {
   // Export the extension using it as implicit class on any the interface instance
@@ -38,8 +34,3 @@ object EncryptionSyntax {
 
 }
 
-
-import EncryptorInstances._
-import EncryptionSyntax._
-
-assert(Password("1234").toEncrypted == "encrypted{abc123}")

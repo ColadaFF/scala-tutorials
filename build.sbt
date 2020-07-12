@@ -84,5 +84,6 @@ lazy val scala_strings = (project in file("scala-strings"))
 lazy val scala_cats = (project in file("scala-cats"))
   .settings(
     name := "scala-cats",
-    libraryDependencies += "org.typelevel" %% "cats-core" % "2.1.1"
+    libraryDependencies += "org.typelevel" %% "cats-core" % "2.1.1",
+    libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.5" % Test,
   )
