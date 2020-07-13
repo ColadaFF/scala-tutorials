@@ -1,2 +1,0 @@
-type Id[A] = A
-
